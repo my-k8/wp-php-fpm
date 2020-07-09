@@ -61,7 +61,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: freejqm8-myshala
-              key: password
+              key: PASSWORD
         ports:
         - containerPort: 80
           name: wordpress
