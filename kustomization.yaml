@@ -6,10 +6,11 @@ secretGenerator:
   literals:
   - password=xR3W4Yc73t]H
 secretGenerator:
-- name: freejqm8_myshala
+- name: freejqm8-myshala
   literals:
   - password=HfOQURq8}Imd
 resources:
   - mysql-deploy.yaml
   - wp-deploy.yaml
-  - gw-vs.yaml
+  - wp-gw-vs.yaml
+  - adminer-gw-vs.yaml

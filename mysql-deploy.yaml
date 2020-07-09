@@ -54,13 +54,13 @@ spec:
               name: mysql-pass
               key: password
         - name: MYSQL_DATABASE
-          value: freejqm8_myshala
+          value: freejqm8-myshala
         - name: MYSQL_USER
-          value: freejqm8_myshala
+          value: freejqm8-myshala
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: freejqm8_myshala
+              name: freejqm8-myshala
               key: password
         ports:
         - containerPort: 3306

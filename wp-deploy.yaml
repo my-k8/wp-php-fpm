@@ -54,13 +54,13 @@ spec:
         - name: WORDPRESS_DB_HOST
           value: wordpress-mysql
         - name: WORDPRESS_DB_NAME
-          value: freejqm8_myshala
-        - name: WORDPRESS_DB_USER
-          value: freejqm8_myshala
+          value: freejqm8-myshala
+        - name: WORDPRESS-DB_USER
+          value: freejqm8-myshala
         - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: freejqm8_myshala
+              name: freejqm8-myshala
               key: password
         ports:
         - containerPort: 80
