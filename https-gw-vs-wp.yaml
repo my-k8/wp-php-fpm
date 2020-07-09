@@ -1,0 +1,122 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: istio-svcs-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: "istio-svcs-certs"
+    hosts:
+      - "kiali.mycloudevopsdemo.tk"
+      - "istio-grafana.mycloudevopsdemo.tk"
+      - "tracing.mycloudevopsdemo.tk"
+      - "wp.mycloudevopsdemo.tk"
+      - "adminer.mycloudevopsdemo.tk"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: kiali-virtualservice
+  namespace: istio-system
+spec:
+  hosts:
+  - "kiali.mycloudevopsdemo.tk"
+  gateways:
+  - istio-svcs-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 20001
+        host: kiali
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: tracing-virtualservice
+  namespace: istio-system
+spec:
+  hosts:
+  - "tracing.mycloudevopsdemo.tk"
+  gateways:
+  - istio-svcs-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 80
+        host: tracing
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: istio-grafana-virtualservice
+  namespace: istio-system
+spec:
+  hosts:
+  - "istio-grafana.mycloudevopsdemo.tk"
+  gateways:
+  - istio-svcs-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 3000
+        host: grafana
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: wp-virtualservice
+  namespace: istio-system
+spec:
+  hosts:
+  - "wp.mycloudevopsdemo.tk"
+  gateways:
+  - istio-svcs-gateway
+  http:
+          #- match:
+          #- uri:
+          #prefix: /
+    - route:
+      - destination:
+        port:
+          number: 80
+        host: wordpress
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: adminer-virtualservice
+  namespace: istio-system
+spec:
+  hosts:
+  - "adminer.mycloudevopsdemo.tk"
+  gateways:
+  - istio-svcs-gateway
+  http:
+          #- match:
+          #- uri:
+          #prefix: /
+    - route:
+      - destination:
+        port:
+          number: 8080
+        host: adminer-svc

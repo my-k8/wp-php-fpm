@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: istio-svcs-certs
+  namespace: istio-system
+spec:
+  secretName: istio-svcs-certs
+  issuerRef:
+    name: letsencrypt-prod-istio
+    kind: ClusterIssuer
+  commonName: istio-grafana.mycloudevopsdemo.tk
+  dnsNames:
+  - kiali.mycloudevopsdemo.tk
+  - istio-grafana.mycloudevopsdemo.tk
+  - tracing.mycloudevopsdemo.tk
+  - wp.mycloudevopsdemo.tk
+  - adminer.mycloudevopsdemo.tk  

@@ -47,7 +47,7 @@ spec:
       imagePullSecrets:
       - name: canister-secret 
       containers:
-      - image: cloud.canister.io:5000/ahprayag/ng-wp:v1
+      - image: cloud.canister.io:5000/ahprayag/wp-php-fpm:v2
         #- image: wordpress
         name: wordpress
         env:
@@ -55,7 +55,7 @@ spec:
           value: wordpress-mysql
         - name: WORDPRESS_DB_NAME
           value: freejqm8-myshala
-        - name: WORDPRESS-DB_USER
+        - name: WORDPRESS_DB_USER
           value: freejqm8-myshala
         - name: WORDPRESS_DB_PASSWORD
           valueFrom:
