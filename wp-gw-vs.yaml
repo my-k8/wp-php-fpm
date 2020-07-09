@@ -11,7 +11,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "nginx-wp.mycloudevopsdemo.tk"
+    - "wp.mycloudevopsdemo.tk"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -19,7 +19,7 @@ metadata:
   name: wp-vs
 spec:
   hosts:
-  - "nginx-wp.mycloudevopsdemo.tk"
+  - "wp.mycloudevopsdemo.tk"
   gateways:
   - wp-gw
   http:

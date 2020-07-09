@@ -47,7 +47,7 @@ spec:
       imagePullSecrets:
       - name: canister-secret 
       containers:
-      - image: cloud.canister.io:5000/ahprayag/ng-wp:v4
+      - image: cloud.canister.io:5000/ahprayag/ng-wp:v1
         #- image: wordpress
         name: wordpress
         env:
