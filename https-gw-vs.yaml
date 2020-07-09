@@ -18,8 +18,6 @@ spec:
       - "kiali.mycloudevopsdemo.tk"
       - "istio-grafana.mycloudevopsdemo.tk"
       - "tracing.mycloudevopsdemo.tk"
-      - "wp.mycloudevopsdemo.tk"
-      - "adminer.mycloudevopsdemo.tk"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -80,43 +78,3 @@ spec:
         port:
           number: 3000
         host: grafana
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: wp-virtualservice
-  namespace: istio-system
-spec:
-  hosts:
-  - "wp.mycloudevopsdemo.tk"
-  gateways:
-  - istio-svcs-gateway
-  http:
-          #- match:
-          #- uri:
-          #prefix: /
-    - route:
-      - destination:
-        port:
-          number: 80
-        host: wordpress
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: adminer-virtualservice
-  namespace: istio-system
-spec:
-  hosts:
-  - "adminer.mycloudevopsdemo.tk"
-  gateways:
-  - istio-svcs-gateway
-  http:
-          #- match:
-          #- uri:
-          #prefix: /
-    - route:
-      - destination:
-        port:
-          number: 8080
-        host: adminer-svc

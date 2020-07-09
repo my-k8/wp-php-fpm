@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: dev-svcs-certs
+  namespace: dev
+spec:
+  secretName: dev-svcs-certs
+  issuerRef:
+    name: letsencrypt-prod-istio
+    kind: ClusterIssuer
+  commonName: web.mycloudevopsdemo.tk
+  dnsNames:
+  - web.mycloudevopsdemo.tk
+  - mysql.mycloudevopsdemo.tk

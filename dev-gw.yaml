@@ -1,0 +1,35 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: dev-svcs-gateway
+  namespace: dev
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: "dev-svcs-certs"
+    hosts:
+      - "web.mycloudevopsdemo.tk"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: wp-vs
+  namespace: dev
+spec:
+  hosts:
+  - "web.mycloudevopsdemo.tk"
+  gateways:
+  - dev-svcs-gateway
+  http:
+   - route:
+     - destination:
+        port:
+          number: 80
+        host: wordpress
