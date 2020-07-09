@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: adminer-gw
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "adminer.mycloudevopsdemo.tk"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: adminer-vs
+spec:
+  hosts:
+  - "adminer.mycloudevopsdemo.tk"
+  gateways:
+  - adminer-gw
+  http:
+    - route:
+      - destination:
+          host: adminer-svc
+          port:
+            number: 8080
